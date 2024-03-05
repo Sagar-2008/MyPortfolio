@@ -16,7 +16,7 @@ const nav = document.querySelector(".nav"),
 for (let i = 0; i < totalNavList; i++) {
     const a = navList[i].querySelector("a");
     a.addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default anchor behavior
+        event.preventDefault();
         if (!isAnimating && !this.classList.contains("active")) {
             isAnimating = true;
 
@@ -56,13 +56,15 @@ function showSection(element) {
 
 const navTogglerBtn = document.querySelector(".nav-toggler"),
     aside = document.querySelector(".aside");
-    navTogglerBtn.addEventListener("click", () => {
-        asideSectionTogglerBtn();
-    })
-    function asideSectionTogglerBtn(){
-        aside.classList.toggle("open");
-        navTogglerBtn.classList.toggle("open");
-        for(let i = 0; i<totalSection; i++){
-            allSection[i].classList.toggle("open");
-        }
+    
+navTogglerBtn.addEventListener("click", () => {
+    asideSectionTogglerBtn();
+})
+    
+function asideSectionTogglerBtn(){
+    aside.classList.toggle("open");
+    navTogglerBtn.classList.toggle("open");
+    for(let i = 0; i<totalSection; i++){
+        allSection[i].classList.toggle("open");
     }
+}

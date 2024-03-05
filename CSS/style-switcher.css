@@ -38,7 +38,25 @@
 }
 .style-switcher .style-switcher-toggler
 {
-    top: 0;
+    top: 0px;
+}
+.style-switcher .style-switcher-toggler i.fa-spin
+{
+    position: absolute;
+    top: 23%;
+    left: 23%;
+}
+.style-switcher .day-night i.fa-sun
+{
+    position: absolute;
+    top: 23%;
+    left: 23%;
+}
+.style-switcher .day-night i.fa-moon
+{
+    position: absolute;
+    top: 23%;
+    left: 27%;
 }
 .style-switcher .day-night
 {
