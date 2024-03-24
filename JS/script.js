@@ -1,70 +1,62 @@
-var typed = new Typed(".typing",{
-    strings:["","Web Designer","Web Developer","Backend Developer","Freelancer"],
-    typeSpeed:100,
-    BackSpeed:60,
-    loop:true
-})
-
+const nav = document.querySelector(".nav");
+const navList = nav.querySelectorAll("li");
+const totalNavList = navList.length;
+const allSections = document.querySelectorAll(".section");
+const totalSections = allSections.length;
 let isAnimating = false;
 
-const nav = document.querySelector(".nav"),
-    navList = nav.querySelectorAll("li"),
-    totalNavList = navList.length,
-    allSection = document.querySelectorAll(".section"),
-    totalSection = allSection.length;
+const typed = new Typed(".typing", {
+    strings: ["", "Web Designer", "Web Developer", "Backend Developer", "Freelancer"],
+    typeSpeed: 100,
+    backSpeed: 60,
+    loop: true
+});
 
-for (let i = 0; i < totalNavList; i++) {
-    const a = navList[i].querySelector("a");
-    a.addEventListener("click", function (event) {
-        event.preventDefault();
-        if (!isAnimating && !this.classList.contains("active")) {
-            isAnimating = true;
+navList.forEach((item) => {
+    const link = item.querySelector("a");
+    link.addEventListener("click", handleNavClick);
+});
 
-            for (let i = 0; i < totalSection; i++) {
-                allSection[i].classList.remove("back-section", "active");
-            }
-
-            for (let j = 0; j < totalNavList; j++) {
-                if (navList[j].querySelector("a").classList.contains("active")) {
-                    allSection[j].classList.add("back-section");
-                }
-                navList[j].querySelector("a").classList.remove("active");
-            }
-
-            this.classList.add("active");
-            showSection(this);
-            if(window.innerWidth < 1200){
-                asideSectionTogglerBtn();
-            }
+function handleNavClick(event) {
+    event.preventDefault();
+    if (!isAnimating && !this.classList.contains("active")) {
+        isAnimating = true;
+        deactivateSections();
+        activateSection(this);
+        if (window.innerWidth < 1200) {
+            toggleAside();
         }
+    }
+}
+
+function deactivateSections() {
+    allSections.forEach((section) => {
+        section.classList.remove("active", "back-section");
+    });
+    navList.forEach((item) => {
+        item.querySelector("a").classList.remove("active");
     });
 }
 
-function showSection(element) {
-    for (let i = 0; i < totalSection; i++) {
-        allSection[i].classList.remove("active");
-    }
-
+function activateSection(element) {
     const target = element.getAttribute("href").split("#")[1];
     const targetSection = document.querySelector("#" + target);
-    
     targetSection.classList.add("active");
+    element.classList.add("active");
     setTimeout(() => {
         isAnimating = false;
     }, 1000);
 }
 
-const navTogglerBtn = document.querySelector(".nav-toggler"),
-    aside = document.querySelector(".aside");
-    
-navTogglerBtn.addEventListener("click", () => {
-    asideSectionTogglerBtn();
-})
-    
-function asideSectionTogglerBtn(){
+const navTogglerBtn = document.querySelector(".nav-toggler");
+const aside = document.querySelector(".aside");
+
+navTogglerBtn.addEventListener("click", toggleAside);
+
+function toggleAside() {
     aside.classList.toggle("open");
     navTogglerBtn.classList.toggle("open");
-    for(let i = 0; i<totalSection; i++){
-        allSection[i].classList.toggle("open");
-    }
+    allSections.forEach((section) => {
+        section.classList.toggle("open");
+    });
 }
