@@ -30,9 +30,9 @@ dayNight.addEventListener("click", () => {
 
 window.addEventListener("load", () => {
     if(document.body.classList.contains("bright")){
-        dayNight.querySelector("i").classList.add("fa-sun");
+        dayNight.querySelector("i").classList.add("fa-moon");
     }
     else{
-        dayNight.querySelector("i").classList.add("fa-moon");
+        dayNight.querySelector("i").classList.add("fa-sun");
     }
 })
